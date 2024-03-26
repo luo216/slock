@@ -9,6 +9,7 @@ int main() {
 
   sleep(1);
   // 启动 slock 锁屏程序
+  system("pkill picom");
   system("slock &");
   sleep(1);
 
@@ -20,7 +21,7 @@ int main() {
 
   // 检测 slock 是否还在运行
   while (1) {
-    sleep(8);
+    sleep(4);
     if (system("pgrep -x slock > /dev/null") == 0) {
       // 当达到 3 次时执行睡眠指令
       if (var == 3) {
@@ -32,6 +33,7 @@ int main() {
     } else {
       // 重新设置 DPMS 参数
       system("xset dpms 600 600 600");
+      system("picom &");
       break;
     }
   }
