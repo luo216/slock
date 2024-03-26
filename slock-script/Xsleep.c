@@ -1,30 +1,36 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
-int main() {
+int main(int argc, char *argv[]) {
+  // 检查是否提供了足够的参数
+  if (argc != 2) {
+    printf("Usage: %s <timeout>\n", argv[0]);
+    return 1;
+  }
+
+  // 将字符串转换为整数
+  unsigned int timeout = atoi(argv[1]) * 60;
+
   // 设置屏幕保护和 DPMS 参数
   system("xset s on");
   system("xset +dpms");
-  system("xset dpms 9 9 9");
+  system("xset dpms 10 10 10");
 
-  sleep(1);
   // 启动 slock 锁屏程序
   system("pkill picom");
   system("slock &");
   sleep(1);
-
-  // 进入睡眠状态
-  system("systemctl suspend");
 
   // 初始化变量
   int var = 0;
 
   // 检测 slock 是否还在运行
   while (1) {
-    sleep(4);
+    sleep(1);
     if (system("pgrep -x slock > /dev/null") == 0) {
-      // 当达到 3 次时执行睡眠指令
-      if (var == 3) {
+      // 当达到 timeout 次时执行睡眠指令
+      if (var == timeout) {
         system("systemctl suspend");
         var = 0;
       } else {
