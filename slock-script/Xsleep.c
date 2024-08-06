@@ -40,6 +40,7 @@ int main(int argc, char *argv[]) {
       // 重新设置 DPMS 参数
       system("xset dpms 600 600 600");
       system("picom &");
+      system("setxkbmap -option 'caps:super'");
       break;
     }
   }
