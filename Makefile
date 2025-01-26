@@ -33,7 +33,6 @@ dist: clean
 install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	cp -f slock ${DESTDIR}${PREFIX}/bin
-	cp -f ./slock-script/Xsleep ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/slock
 	chmod u+s ${DESTDIR}${PREFIX}/bin/slock
 	mkdir -p ${DESTDIR}${MANPREFIX}/man1
@@ -42,7 +41,6 @@ install: all
 
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/slock
-	rm -f ${DESTDIR}${PREFIX}/bin/Xsleep
 	rm -f ${DESTDIR}${MANPREFIX}/man1/slock.1
 
 .PHONY: all clean dist install uninstall
